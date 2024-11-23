@@ -708,7 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceTexture: {fileID: 8400000, guid: bd2a347ab40ca674b9087e50d2b34d8c, type: 2}
   clear: 0
-  destRenderTexture: {fileID: 8600000, guid: 88c9196c7a952e14383d4d8fe89edaf5, type: 2}
+  destRenderTexture: {fileID: 8400000, guid: f89e2ec158c26da4aafb1b5bad46731c, type: 2}
   mat: {fileID: 2100000, guid: c16c681369372f64280b38176615c3a6, type: 2}
 --- !u!1 &2143456077
 GameObject:

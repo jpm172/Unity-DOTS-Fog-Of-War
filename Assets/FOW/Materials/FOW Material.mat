@@ -31,8 +31,12 @@ Material:
         m_Texture: {fileID: 8400000, guid: 9f48b0ea46e29084c83bcc376b4c1ffc, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ObstacleTex:
+        m_Texture: {fileID: 8400000, guid: 9f48b0ea46e29084c83bcc376b4c1ffc, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SeenTex:
-        m_Texture: {fileID: 8600000, guid: 88c9196c7a952e14383d4d8fe89edaf5, type: 2}
+        m_Texture: {fileID: 8400000, guid: f89e2ec158c26da4aafb1b5bad46731c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints:
@@ -48,6 +52,7 @@ Material:
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0.7}
     - _FloorColor: {r: 0.11698109, g: 0.11698109, b: 0.11698109, a: 1}
+    - _ObstacleColor: {r: 0.4566037, g: 0.4566037, b: 0.4566037, a: 1}
     - _SeenColor: {r: 0.3056603, g: 0.3056603, b: 0.3056603, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

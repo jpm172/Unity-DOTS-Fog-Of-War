@@ -86,13 +86,13 @@ public partial struct EyeSystem : ISystem
             RenderMeshArray arr = state.EntityManager.GetSharedComponentManaged<RenderMeshArray>(entity);
             Mesh curMesh = arr.GetMesh( info.ValueRO );
             
-            /*
+            
             Material eyeMat = arr.GetMaterial( info.ValueRO );
             eyeMat.SetVector( Center, new float4(ltw.Position.x, ltw.Position.y,0,0) );
             eyeMat.SetFloat( Hardness, eye.Hardness );
             eyeMat.SetFloat( Strength, eye.Strength );
             eyeMat.SetFloat( Radius, eye.ViewDistance );
-            */
+            
 
             curMesh.Clear();
             curMesh.vertices = vertices.Slice(0, newLength.Value).ToArray();
