@@ -92,7 +92,7 @@ Shader "Universal Render Pipeline/Custom/DotsRevealShader"
                 return output;
             }
 
-            //get the distance from the vertex position to the center with some smoothing
+            //get the distance from the fragment position to the center with some smoothing
             float mask(float3 position, float3 center, float radius, float hardness)
             {
                 float dist = distance(center, position);

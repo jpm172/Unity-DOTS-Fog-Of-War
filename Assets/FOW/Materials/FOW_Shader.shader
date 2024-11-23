@@ -1,5 +1,7 @@
 Shader "Unlit/FOW_Shader"
 {
+    //this shader interprets all the information passed in by the render textures to determine
+    //what parts of the level and obstacles should be completely visible, previously seen, or unseen
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
@@ -54,7 +56,6 @@ Shader "Unlit/FOW_Shader"
             
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
-            float4 _SeenTex_TexelSize;
             
             int _SeenDist;
             
@@ -71,7 +72,7 @@ Shader "Unlit/FOW_Shader"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
+                // sample the textures
                 fixed4 col = tex2D(_MainTex, i.uv);
                 fixed4 obstacleCol = tex2D(_ObstacleTex, i.uv);
                 fixed4 floorCol = tex2D(_SeenTex, i.uv);
@@ -82,6 +83,7 @@ Shader "Unlit/FOW_Shader"
                 
                 float4 startCol = _ObstacleColor;            
                 
+                //if the fragment is on an obstacle, sample around the area to see if it is currently being looked at
                 if(obstacleCol.r > 0)
                 {                
                     fixed4 visibleCol = tex2D(_MainTex, i.uv + float2(0, _MainTex_TexelSize.y*_SeenDist ));
@@ -93,7 +95,7 @@ Shader "Unlit/FOW_Shader"
                     visibleCol = tex2D(_MainTex, i.uv - float2(_MainTex_TexelSize.x*_SeenDist, 0));
                     visible = max(visible,visibleCol.r);
                     
-                        
+                    //if the obstacle is NOT being currently looked at, sample to see if it has previously been looked at
                     if(visible < .1)
                     {
                         fixed4 seenCol = tex2D(_SeenTex, i.uv + float2(0, _MainTex_TexelSize.y*_SeenDist ));
@@ -105,11 +107,11 @@ Shader "Unlit/FOW_Shader"
                         seenCol = tex2D(_SeenTex, i.uv - float2(_MainTex_TexelSize.x*_SeenDist, 0));
                         seen = max(seen, seenCol.r);
                         
-                        if(seen < 0.05)//prevent the walls from being marked as "seen" if close to 0
+                        if(seen < 0.1)//prevent the walls from being marked as "seen" if close to 0
                             seen = 0;
                     }
                 }
-                else if(floorCol.r > 0.1)
+                else if(floorCol.r > 0.1)//if the fragment is on a part of the floor we have seen, use that as the base color
                 {
                     startCol = _FloorColor;
                     seen = 1;
