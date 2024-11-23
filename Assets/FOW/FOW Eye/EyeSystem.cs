@@ -82,18 +82,18 @@ public partial struct EyeSystem : ISystem
             }.Run();
             
             
-            
+            //fetch the mesh from the render mesh array
             RenderMeshArray arr = state.EntityManager.GetSharedComponentManaged<RenderMeshArray>(entity);
             Mesh curMesh = arr.GetMesh( info.ValueRO );
             
-            
+            //fetch and update the material from the render mesh array
             Material eyeMat = arr.GetMaterial( info.ValueRO );
             eyeMat.SetVector( Center, new float4(ltw.Position.x, ltw.Position.y,0,0) );
             eyeMat.SetFloat( Hardness, eye.Hardness );
             eyeMat.SetFloat( Strength, eye.Strength );
             eyeMat.SetFloat( Radius, eye.ViewDistance );
             
-
+            //update the mesh
             curMesh.Clear();
             curMesh.vertices = vertices.Slice(0, newLength.Value).ToArray();
             curMesh.triangles = triangles.Slice(0, newLength.Value*3).ToArray();
@@ -145,6 +145,8 @@ public struct EyePhyicsQueryJob : IJob
             if ( i > 0 )
             {
                 bool threshold = math.abs( oldViewCast.Distance - viewCast.Distance ) > eye.EdgeDistanceThreshold;
+                //if the previous cast and the current cast have different results, or the two results are too far away from each other
+                //try and find the points in between the two casts to get a more accurate result
                 if ( oldViewCast.Hit != viewCast.Hit || (oldViewCast.Hit && viewCast.Hit && threshold) )
                 {
                     EdgeInfo edge = FindEdge( oldViewCast, viewCast );
