@@ -1,35 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
-using Unity.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class EyeAuthoring : MonoBehaviour
+public class StencilEyeAuthoring : MonoBehaviour
 {
-
+    
     public float Resolution;
     public float FOV;
     public float RelativeAngle;
     public float ViewDistance;
     public float EdgeDistanceThreshold;
     public float CutAway;
-    public float Hardness;
-    public float Strength;
     public int ResolveIterations;
     
-    public class EyeBaker : Baker<EyeAuthoring>
+    public class StencilEyeAuthoringBaker : Baker<StencilEyeAuthoring>
     {
-        public override void Bake(EyeAuthoring authoring)
+        public override void Bake(StencilEyeAuthoring authoring)
         {
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent( entity, new EyeComponent
+            AddComponent( entity, new StencilEyeComponent
             {
                 Resolution = authoring.Resolution,
                 FOV = authoring.FOV,
-                Hardness = authoring.Hardness,
-                Strength = authoring.Strength,
                 RelativeAngle = authoring.RelativeAngle,
                 ViewDistance = authoring.ViewDistance,
                 EdgeDistanceThreshold = authoring.EdgeDistanceThreshold,
@@ -44,7 +36,7 @@ public class EyeAuthoring : MonoBehaviour
     }
 }
 
-public struct EyeComponent : IComponentData
+public struct StencilEyeComponent : IComponentData
 {
     //values for making the eye mesh
     public float Resolution;
@@ -56,8 +48,6 @@ public struct EyeComponent : IComponentData
     public float EdgeDistanceThreshold;
     public int ResolveIterations;
     public float CutAway;
-
-    //values for the eye material
-    public float Hardness;
-    public float Strength;
 }
+
+

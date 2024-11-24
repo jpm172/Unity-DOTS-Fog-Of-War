@@ -12,7 +12,7 @@ public partial class ObstacleCameraSystem : SystemBase
     
     protected override void OnCreate()
     {
-        EntityQuery query = GetEntityQuery(typeof(RenderMeshArray));
+        EntityQuery query = GetEntityQuery(typeof(RenderMeshArray), typeof(EyeComponent));
         RequireForUpdate(query);
     }
     
@@ -29,7 +29,14 @@ public partial class ObstacleCameraSystem : SystemBase
 
     private void RenderAndDisable()
     {
-        _camera = GameObject.Find( "Obstacle Camera" ).GetComponent<Camera>();
+        GameObject cameraObj = GameObject.Find( "Obstacle Camera" );
+        if ( _camera == null )
+        {
+            World.GetExistingSystemManaged<ObstacleCameraSystem>().Enabled = false;
+            return;
+        }
+
+        _camera = cameraObj.GetComponent<Camera>();
         _camera.Render();
         _camera.gameObject.SetActive(false);
         
