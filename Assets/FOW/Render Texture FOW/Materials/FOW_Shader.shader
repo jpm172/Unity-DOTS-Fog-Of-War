@@ -117,8 +117,9 @@ Shader "Unlit/FOW_Shader"
                     seen = 1;
                 }
                
-                
-                float4 result = lerp(startCol*float4(seen, seen,seen, 1), float4(0,0,0,0), max(col.r, visible));
+                float finalVisibility = max(col.r, visible);
+                //lerp between startCol and a completely transparent color to get the result
+                float4 result = lerp(startCol*float4(seen, seen,seen, 1), float4(0,0,0,0), finalVisibility);
 
                 return result;
             }

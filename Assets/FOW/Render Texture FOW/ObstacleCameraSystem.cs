@@ -29,8 +29,8 @@ public partial class ObstacleCameraSystem : SystemBase
 
     private void RenderAndDisable()
     {
-        GameObject cameraObj = GameObject.Find( "Obstacle Camera" );
-        if ( _camera == null )
+        GameObject cameraObj = GameObject.FindWithTag( "ObstacleCamera" );
+        if ( cameraObj == null )
         {
             World.GetExistingSystemManaged<ObstacleCameraSystem>().Enabled = false;
             return;

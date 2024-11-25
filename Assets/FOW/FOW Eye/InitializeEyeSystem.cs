@@ -30,7 +30,6 @@ public partial class InitializeEyeSystem : SystemBase
 
         _revealMat = new Material( Shader.Find( "Universal Render Pipeline/Custom/DotsRevealShader" ) );
         _stencilMat =  new Material( Shader.Find( "Universal Render Pipeline/Custom/DotsStencilMask" ) );
-        //_stencilMat =  new Material( Shader.Find( "Universal Render Pipeline/Unlit" ) );
         
         RequireForUpdate<InitializeTag>();
 

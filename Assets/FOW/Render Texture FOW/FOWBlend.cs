@@ -15,11 +15,12 @@ public class FOWBlend : MonoBehaviour
     [SerializeField] private Material mat;
     
     
-    private void Awake()
+    private void Start()
     {
-        Graphics.Blit( sourceTexture, destRenderTexture );
+        //clear on start to remove any leftover data in the texture
+        ClearTexture();
     }
-    
+
 
     private void Update()
     {
@@ -35,7 +36,13 @@ public class FOWBlend : MonoBehaviour
 
     private void ClearTexture()
     {
-        GL.Clear( true, true, Color.black );
+        RenderTexture rt = RenderTexture.active;
+        RenderTexture.active = destRenderTexture;
+        GL.Clear(true, true, Color.black);
+        RenderTexture.active = rt;
+
+        
+        //GL.Clear( true, true, Color.black );
     }
     
 }
