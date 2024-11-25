@@ -38,7 +38,7 @@ public class FOWBlend : MonoBehaviour
     {
         RenderTexture rt = RenderTexture.active;
         RenderTexture.active = destRenderTexture;
-        GL.Clear(true, true, Color.black);
+        GL.Clear(false, true, Color.black);
         RenderTexture.active = rt;
 
         
