@@ -9,9 +9,9 @@ Two implementations of Fog of War, one scene demonstrates using a series of rend
 
 ## Relevant Systems
 
-* **InitializeEyeSystem**: Creates the required meshes and materials for each new eye before they are updated in **EyeSystem/StencilEyeSystem**.
 * **EyeSystem**: Creates a procedural mesh for each eye that represents its field of view by casting a series of rays.
 * **StencilEyeSystem**: Functions the same as **EyeSystem**, but skips updating any materials on the eye since they are not used in the stencil fog of war.
+* **InitializeEyeSystem**: Creates the required meshes and materials for each new eye before they are updated in **EyeSystem/StencilEyeSystem**.
 * **ObstacleCameraSystem**: Renders the output of and then disables the Obstacle Camera.
 
   
